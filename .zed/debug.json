@@ -20,4 +20,15 @@
     "request": "launch",
     "adapter": "CodeLLDB",
   },
+
+  {
+    "label": "debug_e02_texture_stream",
+    "build": {
+      "command": "mkdir -p build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
+      "cwd": "$ZED_WORKTREE_ROOT",
+    },
+    "program": "$ZED_WORKTREE_ROOT/build/e02_texture_stream",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+  },
 ]

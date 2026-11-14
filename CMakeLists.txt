@@ -12,3 +12,8 @@ add_executable(e01_handle_event "./examples/e01_handle_event.cpp")
 target_compile_features(e01_handle_event PUBLIC cxx_std_20)
 set_target_properties(e01_handle_event PROPERTIES CXX_EXTENSIONS OFF)
 target_link_libraries(e01_handle_event PRIVATE SDL3::SDL3)
+
+add_executable(e02_texture_stream "./examples/e02_texture_stream.cpp")
+target_compile_features(e02_texture_stream PUBLIC cxx_std_20)
+set_target_properties(e02_texture_stream PROPERTIES CXX_EXTENSIONS OFF)
+target_link_libraries(e02_texture_stream PRIVATE SDL3::SDL3)
