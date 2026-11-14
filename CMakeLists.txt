@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
-project(abocpp LANGUAGES CXX)
+project(sdl3cs LANGUAGES CXX)
 
-add_executable(aboCpp "./src/main.cpp")
-target_compile_features(aboCpp PUBLIC cxx_std_20)
-set_target_properties(aboCpp PROPERTIES CXX_EXTENSIONS OFF)
+find_package(SDL3 REQUIRED)
+
+add_executable(e00_minimal "./examples/e00_minimal.cpp")
+target_compile_features(e00_minimal PUBLIC cxx_std_20)
+set_target_properties(e00_minimal PROPERTIES CXX_EXTENSIONS OFF)
+target_link_libraries(e00_minimal PRIVATE SDL3::SDL3)
