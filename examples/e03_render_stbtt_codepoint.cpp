@@ -31,7 +31,10 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
   SDL_SetRenderVSync(renderer, 1);
   size_t font_data_size{};
   void* font_data = nullptr;
-  font_data = SDL_LoadFile(get_relative_path("res/Noto_Sans/static/NotoSans-Regular.ttf").c_str(), &font_data_size);
+  font_data = SDL_LoadFile(
+    get_relative_path("res/Noto_Sans/static/NotoSans-Regular.ttf").c_str(),
+    &font_data_size
+  );
   if (!font_data) {
     return SDL_APP_FAILURE;
   }
@@ -40,8 +43,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
     return SDL_APP_FAILURE;
   }
   int w, h;
-  unsigned char* cp_bitmap =
-    stbtt_GetCodepointBitmap(&font_info, 0, stbtt_ScaleForPixelHeight(&font_info, 100), 'a', &w, &h, 0, 0);
+  const int scale_y = stbtt_ScaleForPixelHeight(&font_info, 100);
+  unsigned char* cp_bitmap = stbtt_GetCodepointBitmap(&font_info, 0, scale_y, 'a', &w, &h, 0, 0);
   if (!cp_bitmap) {
     return SDL_APP_FAILURE;
   }

@@ -29,7 +29,8 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
   if (!pixels) {
     return SDL_APP_FAILURE;
   }
-  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 640, 480);
+  texture =
+    SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 640, 480);
   if (!texture) {
     return SDL_APP_FAILURE;
   }
@@ -60,11 +61,20 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
   int texture_pitch{};
   if (SDL_LockTexture(texture, nullptr, &texture_pixels, &texture_pitch)) {
     for (int i = 0; i < 480; ++i) {
-      SDL_memcpy(static_cast<Uint8*>(texture_pixels) + i * texture_pitch, &pixels[i * 640], 640 * sizeof(Color));
+      SDL_memcpy(
+        static_cast<Uint8*>(texture_pixels) + i * texture_pitch,
+        &pixels[i * 640],
+        640 * sizeof(Color)
+      );
     }
     SDL_UnlockTexture(texture);
   }
-  const SDL_FRect dstrect{.x = 0, .y = 0, .w = static_cast<float>(texture->w), .h = static_cast<float>(texture->h)};
+  const SDL_FRect dstrect{
+    .x = 0,
+    .y = 0,
+    .w = static_cast<float>(texture->w),
+    .h = static_cast<float>(texture->h),
+  };
   SDL_RenderTexture(renderer, texture, nullptr, &dstrect);
   SDL_RenderPresent(renderer);
   return SDL_APP_CONTINUE;
