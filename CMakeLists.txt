@@ -13,7 +13,7 @@ foreach(ei
   e00_minimal
   e01_handle_any_event
   e02_stream_custom_texture
-  e03_load_font
+  e03_render_stbtt_codepoint
 )
   add_executable(${ei} "./examples/${ei}.cpp")
   target_compile_features(${ei} PRIVATE cxx_std_20)
@@ -21,5 +21,5 @@ foreach(ei
   target_link_libraries(${ei} PRIVATE SDL3::SDL3)
 endforeach()
 
-target_include_directories(e03_load_font PRIVATE stb)
-add_dependencies(e03_load_font copy_assets)
+target_include_directories(e03_render_stbtt_codepoint PRIVATE stb)
+add_dependencies(e03_render_stbtt_codepoint copy_assets)
