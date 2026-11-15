@@ -1,45 +1,9 @@
 [
   {
-    "label": "debug_e00_minimal",
-    "build": {
-      "command": "mkdir -p build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
-      "cwd": "$ZED_WORKTREE_ROOT",
-    },
-    "program": "$ZED_WORKTREE_ROOT/build/e00_minimal",
+    "label": "build_and_run_debug",
+    "build": "cmake_build_debug",
+    "program": "$ZED_WORKTREE_ROOT/build/$ZED_STEM",
     "request": "launch",
     "adapter": "CodeLLDB",
   },
-
-  {
-    "label": "debug_e01_handle_event",
-    "build": {
-      "command": "mkdir -p build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
-      "cwd": "$ZED_WORKTREE_ROOT",
-    },
-    "program": "$ZED_WORKTREE_ROOT/build/e01_handle_event",
-    "request": "launch",
-    "adapter": "CodeLLDB",
-  },
-
-  {
-    "label": "debug_e02_texture_stream",
-    "build": {
-      "command": "mkdir -p build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
-      "cwd": "$ZED_WORKTREE_ROOT",
-    },
-    "program": "$ZED_WORKTREE_ROOT/build/e02_texture_stream",
-    "request": "launch",
-    "adapter": "CodeLLDB",
-  },
-
-    {
-      "label": "debug_e03_load_font",
-      "build": {
-        "command": "mkdir -p build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
-        "cwd": "$ZED_WORKTREE_ROOT",
-      },
-      "program": "$ZED_WORKTREE_ROOT/build/e03_load_font",
-      "request": "launch",
-      "adapter": "CodeLLDB",
-    },
 ]

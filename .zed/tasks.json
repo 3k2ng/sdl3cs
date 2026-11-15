@@ -1,0 +1,7 @@
+[
+  {
+    "label": "cmake_build_debug",
+    "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json . && cmake --build build",
+    "cwd": "$ZED_WORKTREE_ROOT",
+  }
+]
