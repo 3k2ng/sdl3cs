@@ -19,7 +19,13 @@ foreach(ei
   target_compile_features(${ei} PRIVATE cxx_std_20)
   set_target_properties(${ei} PROPERTIES CXX_EXTENSIONS OFF)
   target_link_libraries(${ei} PRIVATE SDL3::SDL3)
+  target_include_directories(${ei} PRIVATE stb)
+  add_dependencies(${ei} copy_assets)
+  if(WIN32)
+    add_custom_command(TARGET ${ei} POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different -t
+      $<TARGET_FILE_DIR:${ei}> $<TARGET_RUNTIME_DLLS:${ei}>
+      COMMAND_EXPAND_LISTS
+    )
+  endif()
 endforeach()
-
-target_include_directories(e03_render_stbtt_codepoint PRIVATE stb)
-add_dependencies(e03_render_stbtt_codepoint copy_assets)
