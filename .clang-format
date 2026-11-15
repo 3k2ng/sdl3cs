@@ -1,5 +1,16 @@
 BasedOnStyle: llvm
-IndentWidth: 2
 ColumnLimit: 120
 PointerAlignment: Left
 AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: Inline
+AlignAfterOpenBracket: BlockIndent
+ContinuationIndentWidth: 2
+ConstructorInitializerIndentWidth: 2
+BinPackArguments: false
+BinPackParameters: OnePerLine
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+InsertBraces: true
+QualifierAlignment: Left
+IncludeBlocks: Regroup
+IncludeCategories: [{Regex: '^<.*[./]', Priority: 1}, {Regex: '^"', Priority: 2}, {Regex: '^<', Priority: 3}]
