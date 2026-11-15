@@ -6,9 +6,18 @@ static SDL_Window* window = nullptr;
 static SDL_Renderer* renderer = nullptr;
 
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
-  SDL_Init(SDL_INIT_VIDEO);
-  window = SDL_CreateWindow("handle event", 640, 480, 0);
+  if (!SDL_Init(SDL_INIT_VIDEO)) {
+    return SDL_APP_FAILURE;
+  }
+  window = SDL_CreateWindow("handle any event", 640, 480, 0);
+  if (!window) {
+    return SDL_APP_FAILURE;
+  }
   renderer = SDL_CreateRenderer(window, nullptr);
+  if (!renderer) {
+    return SDL_APP_FAILURE;
+  }
+  SDL_SetRenderVSync(renderer, 1);
   return SDL_APP_CONTINUE;
 }
 

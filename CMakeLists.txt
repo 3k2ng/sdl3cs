@@ -11,8 +11,8 @@ add_custom_target(copy_assets
 
 foreach(ei
   e00_minimal
-  e01_handle_event
-  e02_texture_stream
+  e01_handle_any_event
+  e02_stream_custom_texture
   e03_load_font
 )
   add_executable(${ei} "./examples/${ei}.cpp")

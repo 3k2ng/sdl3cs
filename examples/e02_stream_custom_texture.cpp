@@ -13,20 +13,27 @@ static Color* pixels = nullptr;
 static SDL_Texture* texture = nullptr;
 
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
-  SDL_Init(SDL_INIT_VIDEO);
-  window = SDL_CreateWindow("texture stream", 640, 480, 0);
-  renderer = SDL_CreateRenderer(window, nullptr);
-  pixels = static_cast<Color*>(SDL_malloc(640 * 480 * sizeof(Uint32)));
-  texture = SDL_CreateTexture(renderer, SDL_GetWindowPixelFormat(window), SDL_TEXTUREACCESS_STREAMING, 640, 480);
-  for (int i = 0; i < 480; ++i) {
-    for (int j = 0; j < 640; ++j) {
-      Color& pixel = *(pixels + i * 640 + j);
-      pixel.r = j * 255 / 640;
-      pixel.g = i * 255 / 480;
-      pixel.b = 0;
-      pixel.a = 255;
-    }
+  if (!SDL_Init(SDL_INIT_VIDEO)) {
+    return SDL_APP_FAILURE;
   }
+  window = SDL_CreateWindow("stream custom texture", 640, 480, 0);
+  if (!window) {
+    return SDL_APP_FAILURE;
+  }
+  renderer = SDL_CreateRenderer(window, nullptr);
+  if (!renderer) {
+    return SDL_APP_FAILURE;
+  }
+  SDL_SetRenderVSync(renderer, 1);
+  pixels = static_cast<Color*>(SDL_malloc(640 * 480 * sizeof(Color)));
+  if (!pixels) {
+    return SDL_APP_FAILURE;
+  }
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 640, 480);
+  if (!texture) {
+    return SDL_APP_FAILURE;
+  }
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE);
   return SDL_APP_CONTINUE;
 }
 
@@ -48,17 +55,12 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
       pixel.a = 255;
     }
   }
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  SDL_Surface* texture_surface = nullptr;
-  if (SDL_LockTextureToSurface(texture, nullptr, &texture_surface)) {
+  void* texture_pixels = nullptr;
+  int texture_pitch{};
+  if (SDL_LockTexture(texture, nullptr, &texture_pixels, &texture_pitch)) {
     for (int i = 0; i < 480; ++i) {
-      for (int j = 0; j < 640; ++j) {
-        const Color& from_pixel = *(pixels + i * 640 + j);
-        *(static_cast<Uint32*>(texture_surface->pixels) + i * 640 + j) =
-          SDL_MapSurfaceRGBA(texture_surface, from_pixel.r, from_pixel.g, from_pixel.b, from_pixel.a);
-      }
+      SDL_memcpy(static_cast<Uint8*>(texture_pixels) + i * texture_pitch, &pixels[i * 640], 640 * sizeof(Color));
     }
     SDL_UnlockTexture(texture);
   }
