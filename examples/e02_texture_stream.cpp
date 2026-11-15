@@ -56,8 +56,8 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
     for (int i = 0; i < 480; ++i) {
       for (int j = 0; j < 640; ++j) {
         const Color& from_pixel = *(pixels + i * 640 + j);
-        Uint32& to_pixel = *(static_cast<Uint32*>(texture_surface->pixels) + i * 640 + j);
-        to_pixel = SDL_MapSurfaceRGBA(texture_surface, from_pixel.r, from_pixel.g, from_pixel.b, from_pixel.a);
+        *(static_cast<Uint32*>(texture_surface->pixels) + i * 640 + j) =
+          SDL_MapSurfaceRGBA(texture_surface, from_pixel.r, from_pixel.g, from_pixel.b, from_pixel.a);
       }
     }
     SDL_UnlockTexture(texture);
