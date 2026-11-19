@@ -43,7 +43,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
     return SDL_APP_FAILURE;
   }
   int w, h;
-  const int scale_y = stbtt_ScaleForPixelHeight(&font_info, 100);
+  const float scale_y = stbtt_ScaleForPixelHeight(&font_info, 100);
   unsigned char* cp_bitmap = stbtt_GetCodepointBitmap(&font_info, 0, scale_y, 'a', &w, &h, 0, 0);
   if (!cp_bitmap) {
     return SDL_APP_FAILURE;
