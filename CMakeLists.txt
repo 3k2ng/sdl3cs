@@ -14,6 +14,7 @@ foreach(ei
   e01_handle_any_event
   e02_stream_custom_texture
   e03_render_stbtt_codepoint
+  e90_x11_pen
 )
   add_executable(${ei} "./examples/${ei}.cpp")
   target_compile_features(${ei} PRIVATE cxx_std_20)
