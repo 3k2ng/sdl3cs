@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.26)
 project(sdl3cs LANGUAGES CXX)
 
-find_package(SDL3 SDL3_image SDL3_mixer SDL3_ttf REQUIRED)
+find_package(SDL3 REQUIRED)
+find_package(SDL3_image REQUIRED)
+find_package(SDL3_mixer REQUIRED)
+find_package(SDL3_ttf REQUIRED)
 
 add_custom_target(copy_assets
   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different # or copy_directory
