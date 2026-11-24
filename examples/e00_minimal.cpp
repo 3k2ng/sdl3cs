@@ -5,11 +5,13 @@
 static SDL_Window* window = nullptr;
 static SDL_Renderer* renderer = nullptr;
 
+constexpr int width = 640, height = 480;
+
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
   if (!SDL_Init(SDL_INIT_VIDEO)) {
     return SDL_APP_FAILURE;
   }
-  window = SDL_CreateWindow("minimal", 640, 480, 0);
+  window = SDL_CreateWindow("minimal", width, height, 0);
   if (!window) {
     return SDL_APP_FAILURE;
   }

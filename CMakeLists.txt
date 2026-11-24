@@ -14,6 +14,7 @@ add_custom_target(copy_assets
 
 foreach(ei
   e00_minimal
+  e01_fullscreen
 )
   add_executable(${ei} "./examples/${ei}.cpp")
   target_compile_features(${ei} PRIVATE cxx_std_20)
