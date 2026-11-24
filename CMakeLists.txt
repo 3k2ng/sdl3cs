@@ -16,6 +16,7 @@ foreach(ei
   e00_minimal
   e01_fullscreen
   e02_delta_time
+  e03_text
 )
   add_executable(${ei} "./examples/${ei}.cpp")
   target_compile_features(${ei} PRIVATE cxx_std_20)
