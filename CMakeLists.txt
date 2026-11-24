@@ -25,7 +25,6 @@ foreach(ei
     SDL3_mixer::SDL3_mixer
     SDL3_ttf::SDL3_ttf
   )
-  target_include_directories(${ei} PRIVATE stb)
   add_dependencies(${ei} copy_assets)
   if(WIN32)
     add_custom_command(TARGET ${ei} POST_BUILD
